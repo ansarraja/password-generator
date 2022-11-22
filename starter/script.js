@@ -88,16 +88,19 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
 
-// Function to generate password with user input
+// Function to prompt user for password options and generate password with user input
 function generatePassword() {
   var chars = [];
+
+  // get password length and alert if passward lenght is not in a specified range
   var passLength = prompt("What is your password length?");
 
   if (passLength < 10 || passLength > 64) {
     alert("Password should be at least 10 characters but no more than 64.");
   }
+
+  // Prompt user to choose Character types for password and store input and alert user to select a type if none seleced
   else {
     var lowerLetter = confirm("Choose at least one LOWERCASE letter!");
     var upperLetter = confirm("Choose at least one UPPERCASE letter!");
@@ -109,6 +112,7 @@ function generatePassword() {
       return;
     }
 
+    // concat user choosen character types in array so password only contain letters from user's choice
     if (upperLetter) {
       chars = chars.concat(upperCasedCharacters);
     };
