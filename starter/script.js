@@ -93,50 +93,48 @@ var upperCasedCharacters = [
 function generatePassword() {
   var chars = [];
 
-  // get password length and alert if passward lenght is not in a specified range
-  var passLength = prompt("What is your password length?");
+  // get password length and alert if passward lenght is not in a specified number range
+  var passLength = parseInt(prompt("What is your password length?"));
 
-  if (passLength < 10 || passLength > 64) {
+  if (isNaN(passLength) || passLength < 10 || passLength > 64) {
     alert("Password should be at least 10 characters but no more than 64.");
+    return "Password should be at least 10 characters but no more than 64.";
   }
 
   // Prompt user to choose Character types for password and store input and alert user to select a type if none seleced
-  else {
-    var lowerLetter = confirm("Choose at least one LOWERCASE letter!");
-    var upperLetter = confirm("Choose at least one UPPERCASE letter!");
-    var num = confirm("Choose at least one Number!")
-    var spChar = confirm("Choose at least one from Special characters ($@%&*, etc!")
 
-    if (lowerLetter == false && upperLetter == false && num == false && spChar == false) {
-      alert("At least one character type must be selected")
-      return;
-    }
+  var lowerLetter = confirm("Choose at least one LOWERCASE letter!");
+  var upperLetter = confirm("Choose at least one UPPERCASE letter!");
+  var num = confirm("Choose at least one Number!")
+  var spChar = confirm("Choose at least one from Special characters ($@%&*, etc!")
 
-    // concat user choosen character types in array so password only contain letters from user's choice
-    if (upperLetter) {
-      chars = chars.concat(upperCasedCharacters);
-    };
-    if (lowerLetter) {
-      chars = chars.concat(lowerCasedCharacters);
-    };
-    if (num) {
-      chars = chars.concat(numericCharacters);
-    };
-    if (spChar) {
-      chars = chars.concat(specialCharacters);
-    };
+  if (lowerLetter == false && upperLetter == false && num == false && spChar == false) {
+    alert("At least one character type must be selected")
+    return "At least one character type must be selected, Try again !!";
+  }
 
-    //  passwordText.value = password;
-    var password = "";
-    for (var i = 0; i <= passLength; i++) {
-      var randomNumber = Math.floor(Math.random() * chars.length);
-      password += chars[randomNumber];
-    };
-    return password;
+  // concat user choosen character types in array so password only contain letters from user's choice
+  if (upperLetter) {
+    chars = chars.concat(upperCasedCharacters);
   };
-  console.log(`lower case ${lowerLetter}`);
-  console.log(lowerCasedCharacters);
-  console.log("password " + password);
+  if (lowerLetter) {
+    chars = chars.concat(lowerCasedCharacters);
+  };
+  if (num) {
+    chars = chars.concat(numericCharacters);
+  };
+  if (spChar) {
+    chars = chars.concat(specialCharacters);
+  };
+
+  //  passwordText.value = password;
+  var password = "";
+  for (var i = 0; i <= passLength; i++) {
+    var randomNumber = Math.floor(Math.random() * chars.length);
+    password += chars[randomNumber];
+  };
+  return password;
+
 }
 
 // Get references to the #generate element
